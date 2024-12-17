@@ -12,8 +12,8 @@ const initialState: AuthState = {
     status: "idle",
     error: undefined,
     profile: {
-        firstName: null,
-        lastName: null,
+        firstName: undefined,
+        lastName: undefined,
     }
 }
 

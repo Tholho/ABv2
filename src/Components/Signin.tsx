@@ -3,12 +3,12 @@ import { authGetProfile, authGetToken, selectToken } from "../features/auth/auth
 import { useRef } from "react";
 import { RootState } from "../app/store";
 import { useNavigate } from "react-router";
+import { useAppSelector } from "../app/hooks";
 //import { unwrapResult } from "@reduxjs/toolkit";
 
 export const SignIn: React.FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const token = useSelector((state: RootState) => state.auth.token);
 
     const emailInputRef = useRef<null | HTMLInputElement>(null);
     const passwordInputRef = useRef<null | HTMLInputElement>(null);
@@ -30,10 +30,11 @@ export const SignIn: React.FC = () => {
         };
         //console.log(credentials);
         const dispatchResult = await dispatch(authGetToken(credentials));
+        const token = dispatchResult.payload.body.token;
         //console.log(dispatchresult.payload.status);
         if (dispatchResult.payload.status == "200") {
             console.log("dispatching token " + token)
-            dispatch(authGetProfile(dispatchResult.payload.body.token))
+            dispatch(authGetProfile(token))
             navigate("/profile");
           //  console.log("should navigate");
         } 
