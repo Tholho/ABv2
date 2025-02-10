@@ -24,7 +24,7 @@ export const fetchToken = async (credentials: LoginCredentials) => {
     }
 }
 
-export const fetchProfile = async (token: string) => {
+export const fetchProfile = async (token: string | null) => {
     try {
         const bearer = "Bearer " + token;
         const response = await fetch("http://localhost:3001/api/v1/user/profile", {

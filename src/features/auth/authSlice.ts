@@ -46,7 +46,7 @@ export const authSlice = createAppSlice({
               },
         ),
         authGetProfile: create.asyncThunk(
-            async (token: string) => {
+            async (token: string | null) => {
                 const profile = await fetchProfile(token);
                 return profile;
             },

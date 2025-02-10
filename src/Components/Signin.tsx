@@ -7,7 +7,7 @@ export const SignIn: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    //Using refs allows us to easily get value from form input, which are then sent as HTML request payload
+    // Using refs allows us to easily get value from form input, which are then sent as HTML request payload
     const emailInputRef = useRef<null | HTMLInputElement>(null);
     const passwordInputRef = useRef<null | HTMLInputElement>(null);
 
@@ -26,7 +26,7 @@ export const SignIn: React.FC = () => {
           email: emailInputRef.current?.value,
           password: passwordInputRef.current?.value,
         };
-        //Sadly, the redux template for vite isn't completely elaborate regarding typing with actions, I did not bother coding a workaround because the UnknownAction type is explicit
+        // Sadly, the redux template for vite isn't completely elaborate regarding typing with actions, I did not bother coding a workaround because the UnknownAction type is explicit
         const dispatchResult = await dispatch(authGetToken(credentials));
         if (dispatchResult.payload?.status == "200") {
             dispatch(authGetProfile(dispatchResult.payload.body.token))

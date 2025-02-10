@@ -12,7 +12,7 @@ const Header: React.FC = () => {
         await dispatch(authClearToken());
     }
 
-    // renders a different header according to user connection status which relies on token presence
+    // Renders a different header according to user connection status which relies on token presence
     return (
         <header>
             <nav className="main-nav">

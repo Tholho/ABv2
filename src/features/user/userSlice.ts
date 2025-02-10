@@ -1,4 +1,4 @@
-import { NewProfile, UserProfile, UserState } from "../../types";
+import { NewProfile, UserState } from "../../types";
 import { AppThunk } from "../../app/store";
 import { createAppSlice } from "../../app/createAppSlice";
 import { updateProfile } from "./userAPI";
