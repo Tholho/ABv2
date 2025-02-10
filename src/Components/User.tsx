@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useAppSelector } from "../app/hooks"
-import { selectProfile, selectToken } from "../features/auth/authSlice"
+import {  selectToken } from "../features/auth/authSlice"
 import { useEffect } from "react";
 import UserName from "./UserName";
 

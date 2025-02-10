@@ -1,6 +1,6 @@
 export interface LoginCredentials {
-    email: string | null
-    password: string | null
+    email: string | undefined | null
+    password: string | undefined | null
 };
 
 export interface UserProfile {

@@ -26,7 +26,6 @@ export const authSlice = createAppSlice({
         }),
         authGetToken: create.asyncThunk(
             async (credentials: LoginCredentials) => {
-                console.log(credentials)
                 const token = await fetchToken(credentials);
                 return token;
             },
@@ -37,7 +36,6 @@ export const authSlice = createAppSlice({
                 fulfilled: (state, action) => {
                   state.status = "idle";
                   state.token = action.payload.body.token;
-                  console.log(state.token)
                 },
                 rejected: (state, action) => {
                   state.token = "";
