@@ -1,5 +1,4 @@
 import { useAppSelector } from "../app/hooks"
-import { selectStatus } from "../features/login/loginSlice"
 import { authClearToken, selectProfile, selectToken } from "../features/auth/authSlice"
 import { Link } from "react-router"
 import { useDispatch } from "react-redux"
@@ -8,21 +7,12 @@ const Header: React.FC = () => {
     const dispatch = useDispatch();
     const currentProfile = useAppSelector(selectProfile);
     const token = useAppSelector(selectToken)
-    const handleLogout = async () => {
-        //console.log(token);
-        await dispatch(authClearToken());
-        //console.log(token);
-    }
-    //redux get state CONNECTED ?
-    //subscribe
-    // if connected
-    // Sign = Sign out
-    // else
-    // Sign = Sign in
-    //
-    //  <HeaderSignin />
-    //  <HeaderSignout />
 
+    const handleLogout = async () => {
+        await dispatch(authClearToken());
+    }
+
+    // renders a different header according to user connection status which relies on token presence
     return (
         <header>
             <nav className="main-nav">

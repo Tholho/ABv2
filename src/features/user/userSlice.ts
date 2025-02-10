@@ -19,10 +19,7 @@ export const userSlice = createAppSlice({
     reducers: create => ({
         userUpdateProfile: create.asyncThunk(
             async (newProfile: NewProfile) => {
-                console.log("user update token payload " + newProfile.token);
-                console.log("user update profile data " + newProfile.profile)
                 const response = await updateProfile(newProfile.token, newProfile.profile);
-                //response eest alors en fait ici un payload
                 return response;
             },
             {

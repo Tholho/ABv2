@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { useAppSelector } from "../app/hooks";
 import { selectProfile, selectToken } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
-import { NewProfile, UserProfile } from "../types";
-import { updateProfileThunk, userUpdateProfile } from "../features/user/userSlice";
+import { NewProfile } from "../types";
+import { updateProfileThunk } from "../features/user/userSlice";
 import { useNavigate } from "react-router";
 
 export const UserName: React.FC = () => {
@@ -25,7 +25,6 @@ export const UserName: React.FC = () => {
 
     const onSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
-            console.log("onsubmit called");
             if (firstNameInputRef == null || lastNameInputRef == null) {
                 alert("Erreur de formulaire");
                 return;
@@ -41,21 +40,14 @@ export const UserName: React.FC = () => {
                     lastName: lastNameInputRef.current?.value,
                 },
             };
-            //console.log(credentials);
             const dispatchResult = await dispatch(updateProfileThunk(newProfile));
             setIsEditing(false);
-            const dispatchPayload = dispatchResult.payload;
-            //console.log(dispatchresult.payload.status);
             if (dispatchResult.payload.status == "200") {
-                //console.log("dispatching token " + token)
-                console.log(dispatchPayload);
-                //dispatch(authGetProfile(token))
                 navigate("/profile");
-              //  console.log("should navigate");
-            } 
-       
-          //dispatchresult.unwrap() ? console.log("YES") : console.log("NO");
-            //const unwrapresult = dispatchresult.unwrap();
+            }
+            else {
+                alert(dispatchResult.error.message)
+            }
           };
 
     return (
@@ -83,14 +75,3 @@ export const UserName: React.FC = () => {
 }
 
 export default UserName
-
-/*
-<div className="input-wrapper">
-                    <label htmlFor="username">Username</label>
-                    <input ref={emailInputRef} type="text" id="username" />
-                </div>
-                <div className="input-wrapper">
-                    <label htmlFor="password">Password</label>
-                    <input ref={passwordInputRef} type="password" id="password" />
-                </div>
-                */

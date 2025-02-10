@@ -49,7 +49,6 @@ export const authSlice = createAppSlice({
         ),
         authGetProfile: create.asyncThunk(
             async (token: string) => {
-                console.log("reducers token payload " + token);
                 const profile = await fetchProfile(token);
                 return profile;
             },

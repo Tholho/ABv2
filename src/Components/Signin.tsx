@@ -1,10 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { authGetProfile, authGetToken, selectToken } from "../features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { authGetProfile, authGetToken } from "../features/auth/authSlice";
 import { useRef } from "react";
-import { RootState } from "../app/store";
 import { useNavigate } from "react-router";
-import { useAppSelector } from "../app/hooks";
-//import { unwrapResult } from "@reduxjs/toolkit";
 
 export const SignIn: React.FC = () => {
     const dispatch = useDispatch();
@@ -25,27 +22,24 @@ export const SignIn: React.FC = () => {
             return;
         }
         const credentials = {
-          email: emailInputRef.current.value,
-          password: passwordInputRef.current.value,
+          email: emailInputRef.current?.value,
+          password: passwordInputRef.current?.value,
         };
-        //console.log(credentials);
         const dispatchResult = await dispatch(authGetToken(credentials));
-        /*
+        
         console.log(dispatchResult);
+        
         console.log(dispatchResult.payload);
+        /*
         console.log(dispatchResult.payload.status);
         */
-        if (dispatchResult?.payload?.status == "200") {
-            console.log("dispatching token " + dispatchResult.payload.body.token)
+        if (dispatchResult.payload?.status == "200") {
             dispatch(authGetProfile(dispatchResult.payload.body.token))
             navigate("/profile");
-          //  console.log("should navigate");
         }
-        else if (dispatchResult?.payload?.status == "400") {
-            alert("invalid user credentials")
+        else {
+            alert(dispatchResult.error.message)
         }
-        //dispatchresult.unwrap() ? console.log("YES") : console.log("NO");
-        //const unwrapresult = dispatchresult.unwrap();
       };
     return (
         <section className="sign-in-content">
