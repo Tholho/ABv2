@@ -26,13 +26,6 @@ export const SignIn: React.FC = () => {
           password: passwordInputRef.current?.value,
         };
         const dispatchResult = await dispatch(authGetToken(credentials));
-        
-        console.log(dispatchResult);
-        
-        console.log(dispatchResult.payload);
-        /*
-        console.log(dispatchResult.payload.status);
-        */
         if (dispatchResult.payload?.status == "200") {
             dispatch(authGetProfile(dispatchResult.payload.body.token))
             navigate("/profile");
