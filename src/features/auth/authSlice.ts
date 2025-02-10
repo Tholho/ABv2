@@ -40,7 +40,9 @@ export const authSlice = createAppSlice({
                   console.log(state.token)
                 },
                 rejected: (state, action) => {
+                  state.token = "";
                   state.status = "failed";
+                  
                   state.error = action.error.message;
                 },
               },

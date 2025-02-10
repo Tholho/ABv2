@@ -1,13 +1,12 @@
-import HeaderSignin from "./headerSignin"
-import HeaderSignout from "./headerSignout"
 import { useAppSelector } from "../app/hooks"
 import { selectStatus } from "../features/login/loginSlice"
-import { authClearToken, selectToken } from "../features/auth/authSlice"
+import { authClearToken, selectProfile, selectToken } from "../features/auth/authSlice"
 import { Link } from "react-router"
 import { useDispatch } from "react-redux"
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();
+    const currentProfile = useAppSelector(selectProfile);
     const token = useAppSelector(selectToken)
     const handleLogout = async () => {
         //console.log(token);
@@ -40,7 +39,7 @@ const Header: React.FC = () => {
                     <div>
                         <Link className="main-nav-item" to="/profile">
                             <i className="fa fa-user-circle"></i>
-                            Tony
+                            {currentProfile.firstName}
                         </Link>
                         <Link onClick={(e) => {
                             e.preventDefault();

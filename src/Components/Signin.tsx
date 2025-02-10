@@ -30,14 +30,20 @@ export const SignIn: React.FC = () => {
         };
         //console.log(credentials);
         const dispatchResult = await dispatch(authGetToken(credentials));
-        const token = dispatchResult.payload.body.token;
-        //console.log(dispatchresult.payload.status);
-        if (dispatchResult.payload.status == "200") {
-            console.log("dispatching token " + token)
-            dispatch(authGetProfile(token))
+        /*
+        console.log(dispatchResult);
+        console.log(dispatchResult.payload);
+        console.log(dispatchResult.payload.status);
+        */
+        if (dispatchResult?.payload?.status == "200") {
+            console.log("dispatching token " + dispatchResult.payload.body.token)
+            dispatch(authGetProfile(dispatchResult.payload.body.token))
             navigate("/profile");
           //  console.log("should navigate");
-        } 
+        }
+        else if (dispatchResult?.payload?.status == "400") {
+            alert("invalid user credentials")
+        }
         //dispatchresult.unwrap() ? console.log("YES") : console.log("NO");
         //const unwrapresult = dispatchresult.unwrap();
       };

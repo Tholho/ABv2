@@ -30,15 +30,15 @@ export const UserName: React.FC = () => {
                 alert("Erreur de formulaire");
                 return;
             }
-            else if (firstNameInputRef.current.value == "" || lastNameInputRef.current.value == "") {
+            else if (firstNameInputRef.current?.value == "" || lastNameInputRef.current?.value == "") {
                 alert("Merci de saisir votre nom");
                 return;
             }
             const newProfile : NewProfile = {
                 token: token,
                 profile: {
-                    firstName: firstNameInputRef.current.value,
-                    lastName: lastNameInputRef.current.value,
+                    firstName: firstNameInputRef.current?.value,
+                    lastName: lastNameInputRef.current?.value,
                 },
             };
             //console.log(credentials);
