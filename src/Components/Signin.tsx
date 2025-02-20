@@ -13,7 +13,6 @@ export const SignIn: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("handlesubmit called");
         if (emailInputRef == null || passwordInputRef == null) {
             alert("Erreur de formulaire");
             return;
@@ -28,7 +27,7 @@ export const SignIn: React.FC = () => {
         };
         // Sadly, the redux template for vite isn't completely elaborate regarding typing with actions, I did not bother coding a workaround because the UnknownAction type is explicit
         const dispatchResult = await dispatch(authGetToken(credentials));
-        if (dispatchResult.payload?.status == "200") {
+        if (dispatchResult.payload.status == "200") {
             dispatch(authGetProfile(dispatchResult.payload.body.token))
             navigate("/profile");
         }
