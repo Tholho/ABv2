@@ -15,7 +15,6 @@ export interface NewProfile {
 
 export interface AuthState {
   loginCredentials: LoginCredentials
-  isLogged: boolean
   token: string | null
   status: "idle" | "loading" | "failed"
   error: string | undefined

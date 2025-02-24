@@ -4,20 +4,18 @@ import { selectProfile, selectToken } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { NewProfile } from "../types";
 import { updateProfileThunk } from "../features/user/userSlice";
-import { useNavigate } from "react-router";
 
 export const UserName: React.FC = () => {
     const currentProfile = useAppSelector(selectProfile);
     const token = useAppSelector(selectToken);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const firstNameInputRef = useRef<null | HTMLInputElement>(null);
     const lastNameInputRef = useRef<null | HTMLInputElement>(null);
 
     const [isEditing, setIsEditing] = useState(false);
     const onEdit = () => {
-        setIsEditing(true);
+        setIsEditing(true); 
     }
     const onCancel = () => {
         setIsEditing(false);
@@ -42,10 +40,7 @@ export const UserName: React.FC = () => {
             };
             const dispatchResult = await dispatch(updateProfileThunk(newProfile));
             setIsEditing(false);
-            if (dispatchResult.payload.status == "200") {
-                navigate("/profile");
-            }
-            else {
+            if (dispatchResult.payload.status != "200") {
                 alert(dispatchResult.error.message)
             }
           };
